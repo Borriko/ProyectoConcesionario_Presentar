@@ -1,0 +1,80 @@
+<<<<<<< HEAD
+git add .
+git commit -m "Initial commit"
+
+git push -u origin main | git push -u origin master
+
+
+Pasos para enlazar el proyecto de IntellIJ a GitHub
+
+1. Instalar Git
+Descarga e instala Git desde https://git-scm.com/download/win con las opciones por defecto.
+
+2. Configurar tu identidad
+Abre el terminal de IntelliJ y ejecuta:
+git config --global user.email "tu-email@gmail.com"
+git config --global user.name "TuNombre"
+
+3. Inicializar Git en tu proyecto
+git init
+
+4. Enlazar con tu repositorio de GitHub
+git remote add origin https://github.com/tu-usuario/tu-repositorio.git
+
+5. Descargar el contenido remoto
+git fetch origin
+
+6. Añadir tus archivos y hacer el primer commit
+git add .
+git commit -m "commit inicial"
+
+7. Sincronizar con el repositorio remoto
+git pull origin master --allow-unrelated-histories --no-edit
+
+8. Subir tu código a GitHub
+git push origin master
+
+A partir de aquí, cada vez que quieras guardar cambios en GitHub solo necesitas:
+git add .
+git commit -m "descripción del cambio"
+=======
+git add .
+git commit -m "Initial commit"
+
+git push -u origin main | git push -u origin master
+
+
+Pasos para enlazar el proyecto de IntellIJ a GitHub
+
+1. Instalar Git
+Descarga e instala Git desde https://git-scm.com/download/win con las opciones por defecto.
+
+2. Configurar tu identidad
+Abre el terminal de IntelliJ y ejecuta:
+git config --global user.email "tu-email@gmail.com"
+git config --global user.name "TuNombre"
+
+3. Inicializar Git en tu proyecto
+git init
+
+4. Enlazar con tu repositorio de GitHub
+git remote add origin https://github.com/tu-usuario/tu-repositorio.git
+
+5. Descargar el contenido remoto
+git fetch origin
+
+6. Añadir tus archivos y hacer el primer commit
+git add .
+git commit -m "commit inicial"
+
+7. Sincronizar con el repositorio remoto
+git pull origin master --allow-unrelated-histories --no-edit
+
+8. Subir tu código a GitHub
+git push origin master
+
+A partir de aquí, cada vez que quieras guardar cambios en GitHub solo necesitas:
+git add .
+git commit -m "descripción del cambio"
+>>>>>>> ea1d57586dfad72c49bec217f358e112f5801e86
+git push
