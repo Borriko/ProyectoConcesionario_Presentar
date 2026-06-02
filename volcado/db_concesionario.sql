@@ -87,7 +87,8 @@ INSERT INTO usuarios (nombre, password, email, url_imagen, dinero) VALUES
                                                                        ('Javier Torres', '666', 'javier@gmail.com', NULL, 18000.00),
                                                                        ('Elena Diaz', '777', 'elena@gmail.com', NULL, 22000.00),
                                                                        ('David Aguilera', '111', 'david@gmail.com', 'img/fotos_de_perfil/David Aguilera Navarro/foto_perfil.jpeg', 129999.00),
-                                                                       ('Monyination', '111', 'monyi@gmail.com', 'img/fotos_de_perfil/Monyination/foto_perfil.jpeg', 299999.00);
+                                                                       ('Monyination', '111', 'monyi@gmail.com', 'img/fotos_de_perfil/Monyination/foto_perfil.jpeg', 299999.00),
+                                                                       ('Alicia Profe', '111', 'alicia@gmail.com', NULL, 9999999.00);
 
 
 INSERT INTO coches
@@ -115,7 +116,8 @@ VALUES
     ('Ford', 'Mustang', 'Deportivo', 2019, 'Azul', 39000, 'Gasolina', 'Manual', 450, 45999.99, 'Ford Mustang GT V8', 'DISPONIBLE'),
     ('Ford', 'Focus', 'Compacto', 2013, 'Blanco', 175000, 'Diesel', 'Manual', 95, 6999.99, 'Ford Focus económico', 'DISPONIBLE'),
     ('Volkswagen', 'Golf', 'Compacto', 2017, 'Gris', 87000, 'Diesel', 'Manual', 115, 14999.99, 'Volkswagen Golf en buen estado', 'DISPONIBLE'),
-    ('Volkswagen', 'Tiguan', 'SUV', 2021, 'Blanco', 33000, 'Diesel', 'Automatica', 200, 35999.99, 'SUV familiar muy cómodo', 'DISPONIBLE');
+    ('Volkswagen', 'Tiguan', 'SUV', 2021, 'Blanco', 33000, 'Diesel', 'Automatica', 200, 35999.99, 'SUV familiar muy cómodo', 'DISPONIBLE'),
+    ('Toyota', 'Corolla', 'Compacto', 2025, 'Rojo', 999999, 'Hibrido', 'Manual', 184, 35999.99, 'Vehiculo compacto muy mal cuidado, muchos KM', 'DISPONIBLE');
 
 -- =====================================
 -- COMPRAS
@@ -130,7 +132,8 @@ INSERT INTO compras (usuario_id, coche_id, precio_final) VALUES
                                                              (6, 6, 104999.99),
                                                              (7, 7, 16999.99),
                                                              (8, 8, 89999.99),
-                                                             (9, 9, 12999.99);
+                                                             (9, 9, 12999.99),
+                                                             (11, 24, 17000);
 
 -- =====================================
 -- IMAGENES
@@ -139,4 +142,5 @@ INSERT INTO compras (usuario_id, coche_id, precio_final) VALUES
 INSERT INTO imagenes_coches (coche_id, ruta_imagen) VALUES
                                                         (1, 'img/coches/img_mercedes_clase_e_id_1.png'),
                                                         (2, 'img/coches/img_mercedes_clase_c_id_2.png'),
-                                                        (9, 'img/coches/img_mercedes_clase_s_id_9.png');
+                                                        (9, 'img/coches/img_mercedes_clase_s_id_9.png'),
+                                                        (24, 'img/coches/img_toyota_corolla_id_24.png');
