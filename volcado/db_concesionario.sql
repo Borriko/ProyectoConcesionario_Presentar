@@ -117,7 +117,7 @@ VALUES
     ('Ford', 'Focus', 'Compacto', 2013, 'Blanco', 175000, 'Diesel', 'Manual', 95, 6999.99, 'Ford Focus económico', 'DISPONIBLE'),
     ('Volkswagen', 'Golf', 'Compacto', 2017, 'Gris', 87000, 'Diesel', 'Manual', 115, 14999.99, 'Volkswagen Golf en buen estado', 'DISPONIBLE'),
     ('Volkswagen', 'Tiguan', 'SUV', 2021, 'Blanco', 33000, 'Diesel', 'Automatica', 200, 35999.99, 'SUV familiar muy cómodo', 'DISPONIBLE'),
-    ('Toyota', 'Corolla', 'Compacto', 2025, 'Rojo', 999999, 'Hibrido', 'Manual', 184, 35999.99, 'Vehiculo compacto muy mal cuidado, muchos KM', 'DISPONIBLE');
+    ('Toyota', 'Corolla', 'Compacto', 2025, 'Rojo', 999999, 'Hibrido', 'Automatica', 184, 35999.99, 'Vehiculo compacto muy mal cuidado, muchos KM', 'DISPONIBLE');
 
 -- =====================================
 -- COMPRAS
