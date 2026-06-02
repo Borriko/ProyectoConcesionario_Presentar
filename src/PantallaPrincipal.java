@@ -526,45 +526,41 @@ public class PantallaPrincipal extends JPanel {
         // =========================
         // CARGAR COCHES EN HILO
         // =========================
-        new Thread(() -> {
+        List<Coche> coches;
 
-            List<Coche> coches;
+        if (panelCoches_actual == panelCochesDisponibles) {
+            coches = consultas.obtenerVehiculos(
+                    deplegable_marca_de_vehiculo.getSeleccionados(),
+                    deplegable_modelo_de_vehiculo.getSeleccionados(),
+                    desplegable_tipo_de_vehiculo.getSeleccionados(),
+                    anioMinFinal,
+                    anioMaxFinal,
+                    kmMinFinal,
+                    kmMaxFinal
+            );
+        } else {
+            coches = consultas.obtenerVehiculos(
+                    usuario.getId(),
+                    deplegable_marca_de_vehiculo.getSeleccionados(),
+                    deplegable_modelo_de_vehiculo.getSeleccionados(),
+                    desplegable_tipo_de_vehiculo.getSeleccionados(),
+                    anioMinFinal,
+                    anioMaxFinal,
+                    kmMinFinal,
+                    kmMaxFinal
+            );
+        }
 
-            if (panelCoches_actual == panelCochesDisponibles) {
-                coches = consultas.obtenerVehiculos(
-                        deplegable_marca_de_vehiculo.getSeleccionados(),
-                        deplegable_modelo_de_vehiculo.getSeleccionados(),
-                        desplegable_tipo_de_vehiculo.getSeleccionados(),
-                        anioMinFinal,
-                        anioMaxFinal,
-                        kmMinFinal,
-                        kmMaxFinal
-                );
-            } else {
-                coches = consultas.obtenerVehiculos(
-                        usuario.getId(),
-                        deplegable_marca_de_vehiculo.getSeleccionados(),
-                        deplegable_modelo_de_vehiculo.getSeleccionados(),
-                        desplegable_tipo_de_vehiculo.getSeleccionados(),
-                        anioMinFinal,
-                        anioMaxFinal,
-                        kmMinFinal,
-                        kmMaxFinal
-                );
+        SwingUtilities.invokeLater(() -> {
+            for (Coche coche : coches) {
+                JPanel contenedor = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+                contenedor.setOpaque(false);
+                contenedor.add(crearTarjetaCoche(coche));
+                panelCoches_actual.add(contenedor);
             }
-
-            SwingUtilities.invokeLater(() -> {
-                for (Coche coche : coches) {
-                    JPanel contenedor = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-                    contenedor.setOpaque(false);
-                    contenedor.add(crearTarjetaCoche(coche));
-                    panelCoches_actual.add(contenedor);
-                }
-                panelCoches_actual.revalidate();
-                panelCoches_actual.repaint();
-            });
-
-        }).start();
+            panelCoches_actual.revalidate();
+            panelCoches_actual.repaint();
+        });
     }
 
     private JPanel crearTarjetaCoche(Coche coche) {
