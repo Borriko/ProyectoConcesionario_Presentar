@@ -19,7 +19,7 @@ public class PantallaEditarPerfil extends JPanel {
     private JTextField campoNombre;
     private JLabel lblExitoNombre = new JLabel("");
     private JTextField campoEmail;
-    private JTextField campoTelefono;
+    private JTextField campoDinero;
     private String nombre_us;
     private JPasswordField campoContrasenaActual;
     private JPasswordField campoContrasenaNueva;
@@ -257,19 +257,15 @@ public class PantallaEditarPerfil extends JPanel {
         campoEmail.setForeground(new Color(151, 149, 149));
 
         formulario.add(Box.createVerticalStrut(12));
-        campoTelefono = crearCampo(formulario, "Dinero", usuario != null ? String.valueOf(usuario.getDinero()) : "");
+
+        campoDinero = crearCampo(formulario, "Dinero", usuario != null ? String.valueOf(usuario.getDinero()) : "");
+
+        campoDinero.setEditable(false);
+        campoDinero.setBackground(new Color(88, 88, 89));
+        campoDinero.setForeground(new Color(151, 149, 149));
+
         formulario.add(Box.createVerticalStrut(25));
 
-        // =========================
-        // SECCIÓN CONTRASEÑA
-        // =========================
-        JLabel lblSeguridad = new JLabel("SEGURIDAD");
-        lblSeguridad.setFont(new Font("SansSerif", Font.BOLD, 11));
-        lblSeguridad.setForeground(new Color(120, 120, 130));
-        lblSeguridad.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        formulario.add(lblSeguridad);
-        formulario.add(Box.createVerticalStrut(12));
 
 
         // =========================
@@ -390,7 +386,7 @@ public class PantallaEditarPerfil extends JPanel {
         this.usuario = u;
         campoNombre.setText(u != null ? u.getNombre() : "");
         campoEmail.setText(u != null ? u.getEmail() : "");
-        campoTelefono.setText(u != null ? String.valueOf(u.getDinero()) : "");
+        campoDinero.setText(u != null ? String.valueOf(u.getDinero()) : "");
         lblNombreAvatar.setText(u != null ? u.getNombre() : "Usuario");
     }
 
