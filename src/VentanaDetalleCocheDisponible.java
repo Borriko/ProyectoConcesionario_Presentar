@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
+//com
+
 public class VentanaDetalleCocheDisponible extends JFrame {
 
     private static final Color BG_DEEP    = new Color(17, 17, 17);
