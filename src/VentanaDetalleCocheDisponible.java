@@ -26,8 +26,8 @@ public class VentanaDetalleCocheDisponible extends JFrame {
 
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
-        setSize(660, 520);
-        setShape(new RoundRectangle2D.Double(0, 0, 660, 520, 20, 20));
+        setSize(660, 620);
+        setShape(new RoundRectangle2D.Double(0, 0, 660, 620, 20, 20));
         setResizable(false);
 
         JPanel root = new JPanel(new BorderLayout());
@@ -54,24 +54,22 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         panelImagen.setPreferredSize(new Dimension(660, 240));
         panelImagen.setOpaque(false);
 
-        new Thread(() -> {
-            if (url_img != null) {
-                ImageIcon icono = new ImageIcon(url_img);
-                Image orig = icono.getImage();
-                int w = orig.getWidth(null), h = orig.getHeight(null);
-                if (w > 0 && h > 0) {
-                    double escala = Math.min(660.0 / w, 240.0 / h);
-                    int wf = (int)(w * escala), hf = (int)(h * escala);
-                    Image scaled = orig.getScaledInstance(wf, hf, Image.SCALE_SMOOTH);
-                    SwingUtilities.invokeLater(() -> {
-                        panelImagen.putClientProperty("imagen",     scaled);
-                        panelImagen.putClientProperty("anchoFinal", wf);
-                        panelImagen.putClientProperty("altoFinal",  hf);
-                        panelImagen.repaint();
-                    });
-                }
+        if (url_img != null) {
+            ImageIcon icono = new ImageIcon(url_img);
+            Image orig = icono.getImage();
+            int w = orig.getWidth(null), h = orig.getHeight(null);
+            if (w > 0 && h > 0) {
+                double escala = Math.min(660.0 / w, 240.0 / h);
+                int wf = (int)(w * escala), hf = (int)(h * escala);
+                Image scaled = orig.getScaledInstance(wf, hf, Image.SCALE_SMOOTH);
+                SwingUtilities.invokeLater(() -> {
+                    panelImagen.putClientProperty("imagen",     scaled);
+                    panelImagen.putClientProperty("anchoFinal", wf);
+                    panelImagen.putClientProperty("altoFinal",  hf);
+                    panelImagen.repaint();
+                });
             }
-        }).start();
+        }
 
         // Overlay: REF + botón cerrar
         JPanel overlayImagen = new JPanel(new BorderLayout());
@@ -127,7 +125,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
 
         JPanel precioCard = buildStatCard(
                 "Precio",
-                String.format("%,.0f €", coche.getPrecio())
+                String.format("%,.02f €", coche.getPrecio())
         );
 
         rowTitulo.add(colTitulo,  BorderLayout.WEST);
@@ -200,7 +198,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         btnComprar.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnComprar.setMaximumSize(new Dimension(200, 50));
         btnComprar.setPreferredSize(new Dimension(200, 50));
-        btnComprar.addActionListener(e -> handleComprar(pantallaPrincipal.getUsuario(), coche, pantallaPrincipal, btnComprar, lblError));
+        btnComprar.addActionListener(e -> comprarCoche(pantallaPrincipal.getUsuario(), coche, pantallaPrincipal, lblError));
 
         panelInfo.add(rowTitulo);
         panelInfo.add(Box.createVerticalStrut(18));
@@ -238,30 +236,32 @@ public class VentanaDetalleCocheDisponible extends JFrame {
 
     // ── Lógica ────────────────────────────────────────────────────
 
-    private void handleComprar(Usuario usuario, Coche coche, PantallaPrincipal pantalla,
-                               JButton btnComprar, JLabel lblError) {
+    private void comprarCoche(Usuario usuario, Coche coche, PantallaPrincipal pantallaPrincipal, JLabel lblError) {
         if (usuario == null) {
             lblError.setText("Error: usuario no cargado.");
-            return;
+
         }
-        if (usuario.getDinero() < coche.getPrecio()) {
+        else if (usuario.getDinero() < coche.getPrecio()) {
             lblError.setText("No tienes suficiente dinero.");
-            return;
+
+        } else {
+
+            int opcion = JOptionPane.showConfirmDialog(
+                    this,
+                    String.format("¿Comprar por %,.2f €?", coche.getPrecio()),
+                    "Confirmar compra",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                consultas.comprarCoche(usuario, coche);
+                pantallaPrincipal.actualizarCoches();
+                pantallaPrincipal.getPanelSuperior().actualizarSaldo(usuario.getDinero());
+                dispose();
+            }
         }
 
-        int opcion = JOptionPane.showConfirmDialog(
-                this,
-                String.format("¿Comprar por %,.2f €?", coche.getPrecio()),
-                "Confirmar compra",
-                JOptionPane.YES_NO_OPTION
-        );
 
-        if (opcion == JOptionPane.YES_OPTION) {
-            consultas.comprarCoche(usuario, coche);
-            pantalla.actualizarCoches();
-            pantalla.getPanelSuperior().actualizarSaldo(usuario.getDinero());
-            dispose();
-        }
     }
 
     // ── Helpers UI ────────────────────────────────────────────────

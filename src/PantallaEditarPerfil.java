@@ -271,12 +271,6 @@ public class PantallaEditarPerfil extends JPanel {
         formulario.add(lblSeguridad);
         formulario.add(Box.createVerticalStrut(12));
 
-        campoContrasenaActual = crearCampoPassword(formulario, "Contraseña actual");
-        formulario.add(Box.createVerticalStrut(12));
-        campoContrasenaNueva  = crearCampoPassword(formulario, "Nueva contraseña");
-        formulario.add(Box.createVerticalStrut(12));
-        campoContrasenaRepetir = crearCampoPassword(formulario, "Repetir nueva contraseña");
-        formulario.add(Box.createVerticalStrut(25));
 
         // =========================
         // BOTÓN GUARDAR
@@ -357,29 +351,6 @@ public class PantallaEditarPerfil extends JPanel {
         return campo;
     }
 
-    private JPasswordField crearCampoPassword(JPanel panel, String etiqueta) {
-        JLabel lbl = new JLabel(etiqueta);
-        lbl.setFont(new Font("SansSerif", Font.PLAIN, 13));
-        lbl.setForeground(new Color(170, 170, 175));
-        lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        JPasswordField campo = new JPasswordField();
-        campo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 36));
-        campo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        campo.setBackground(new Color(44, 44, 46));
-        campo.setForeground(Color.WHITE);
-        campo.setCaretColor(Color.WHITE);
-        campo.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(60, 60, 65)),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
-
-        panel.add(lbl);
-        panel.add(Box.createVerticalStrut(5));
-        panel.add(campo);
-
-        return campo;
-    }
 
     // =========================
     // LÓGICA

@@ -734,5 +734,31 @@ public class Consultas {
         }
     }
 
+    public boolean pedirPrestamo(Usuario usuario, int dinero) {
+
+        boolean consulta_aceptada = false;
+
+        String sql = "UPDATE usuarios SET dinero = dinero + ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, dinero);
+            pstmt.setInt(2, usuario.getId());
+
+            int filas = pstmt.executeUpdate();
+
+            if (filas > 0) {
+                usuario.setDinero(usuario.getDinero() + dinero);
+                consulta_aceptada = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("ERROR préstamo: " + e.getMessage());
+        }
+
+        return consulta_aceptada;
+    }
+
 
 }

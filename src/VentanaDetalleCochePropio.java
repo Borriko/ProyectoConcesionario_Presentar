@@ -162,8 +162,8 @@ public class VentanaDetalleCochePropio extends JFrame {
         ));
 
         grid.add(buildGridCard(
-                "Potencia",
-                String.format("%,d", coche.getPotencia())
+                "Potencia ",
+                String.format("%,d cv", coche.getPotencia())
         ));
 
         grid.add(buildGridCard(

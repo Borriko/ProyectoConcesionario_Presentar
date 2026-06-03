@@ -138,7 +138,7 @@ public class TarjetaCoche extends JPanel {
         lblKm.setFont(new Font("SansSerif", Font.PLAIN, 13));
         lblKm.setForeground(new Color(170, 170, 175));
 
-        JLabel lblPrecio = new JLabel(String.format("%.02f €", precio));
+        JLabel lblPrecio = new JLabel(String.format("%.0f €", precio));
         lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 18));
         lblPrecio.setForeground(new Color(52, 199, 89));
 
