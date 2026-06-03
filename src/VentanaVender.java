@@ -120,7 +120,7 @@ public class VentanaVender extends JFrame {
         body.setBackground(BG_DEEP);
         body.setBorder(BorderFactory.createEmptyBorder(24, 30, 30, 30));
 
-        JPanel carCard = buildInfoCard(
+        JPanel carCard = construirInformacionTarjeta(
                 coche.getMarca() + " " + coche.getModelo() + " · " + coche.getAnio(),
                 "El precio será visible para los compradores"
         );
@@ -141,12 +141,12 @@ public class VentanaVender extends JFrame {
         txtPrecio.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        errorPanel = buildErrorPanel("Introduce un precio válido");
+        errorPanel = contruirPanelError("Introduce un precio válido");
         errorPanel.setVisible(false);
 
-        JButton btnConfirmar = buildAccentButton("✓ Confirmar venta");
+        JButton btnConfirmar = construirConfirmarBoton("✓ Confirmar venta");
         btnConfirmar.addActionListener(e ->
-                handleConfirmar(pantallaPrincipal.getUsuario(), coche, pantallaPrincipal)
+                confirmarVenta(pantallaPrincipal.getUsuario(), coche, pantallaPrincipal)
         );
 
         JLabel lblNota = new JLabel("Esta acción no se puede deshacer");
@@ -190,9 +190,9 @@ public class VentanaVender extends JFrame {
     // LÓGICA
     // =============================================================
 
-    private void handleConfirmar(Usuario usuario,
-                                 Coche coche,
-                                 PantallaPrincipal pantalla) {
+    private void confirmarVenta(Usuario usuario,
+                                Coche coche,
+                                PantallaPrincipal pantalla) {
 
         try {
 
@@ -213,7 +213,15 @@ public class VentanaVender extends JFrame {
             pantalla.getPanelSuperior()
                     .actualizarSaldo(usuario.getDinero());
 
-            showSuccess(precio);
+            JOptionPane.showMessageDialog(
+                    this,
+                    String.format("Coche vendido por %.2f €", precio),
+                    "Venta completada",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            dispose();
+            ventanaDetalleCochePropio.dispose();
 
         } catch (NumberFormatException ex) {
 
@@ -225,26 +233,14 @@ public class VentanaVender extends JFrame {
         }
     }
 
-    private void showSuccess(double precio) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                String.format("Coche vendido por %.2f €", precio),
-                "Venta completada",
-                JOptionPane.INFORMATION_MESSAGE
-        );
-
-        dispose();
-        ventanaDetalleCochePropio.dispose();
-
-    }
 
 
     // =============================================================
     // COMPONENTES
     // =============================================================
 
-    private JPanel buildInfoCard(String title, String subtitle) {
+    private JPanel construirInformacionTarjeta(String title, String subtitle) {
 
         JPanel card = new JPanel();
 
@@ -288,7 +284,7 @@ public class VentanaVender extends JFrame {
 
 
 
-    private JPanel buildErrorPanel(String msg) {
+    private JPanel contruirPanelError(String msg) {
 
         JPanel panel = new JPanel(
                 new FlowLayout(FlowLayout.CENTER, 8, 6)
@@ -318,7 +314,7 @@ public class VentanaVender extends JFrame {
         return panel;
     }
 
-    private JButton buildAccentButton(String text) {
+    private JButton construirConfirmarBoton(String text) {
 
         JButton btn = new JButton(text);
 
@@ -370,13 +366,5 @@ public class VentanaVender extends JFrame {
         return btn;
     }
 
-    public double getPrecio() {
 
-        try {
-            return Double.parseDouble(txtPrecio.getText());
-        }
-        catch (Exception e) {
-            return 0;
-        }
-    }
 }

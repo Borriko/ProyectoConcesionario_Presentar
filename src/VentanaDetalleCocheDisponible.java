@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
-//com
-
 public class VentanaDetalleCocheDisponible extends JFrame {
 
     private static final Color BG_DEEP    = new Color(17, 17, 17);
@@ -25,7 +23,6 @@ public class VentanaDetalleCocheDisponible extends JFrame {
     private Consultas consultas = new Consultas();
 
     public VentanaDetalleCocheDisponible(Coche coche, String url_img, PantallaPrincipal pantallaPrincipal) {
-
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
         setSize(660, 620);
@@ -89,7 +86,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         ));
 
         overlayImagen.add(lblRef,          BorderLayout.WEST);
-        overlayImagen.add(buildCloseButton(), BorderLayout.EAST);
+        overlayImagen.add(contruirBotonCerrar(), BorderLayout.EAST);
 
         panelImagen.add(overlayImagen, BorderLayout.NORTH);
         panelImagen.setBorder(new MatteBorder(0, 0, 1, 0, BORDER));
@@ -125,7 +122,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         colTitulo.add(Box.createVerticalStrut(4));
         colTitulo.add(lblMeta);
 
-        JPanel precioCard = buildStatCard(
+        JPanel precioCard = contruirTarjetaPrecio(
                 "Precio",
                 String.format("%,.02f €", coche.getPrecio())
         );
@@ -138,9 +135,9 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         grid.setBackground(BG_DEEP);
         grid.setMaximumSize(new Dimension(Integer.MAX_VALUE, 76));
         grid.setAlignmentX(Component.LEFT_ALIGNMENT);
-        grid.add(buildGridCard("Transmisión", String.valueOf(coche.getTransmision())));
-        grid.add(buildGridCard("Potencia",    String.format("%,d cv", coche.getPotencia())));
-        grid.add(buildGridCard("Color",       coche.getColor()));
+        grid.add(contruirTarjetaGrid("Transmisión", String.valueOf(coche.getTransmision())));
+        grid.add(contruirTarjetaGrid("Potencia",    String.format("%,d cv", coche.getPotencia())));
+        grid.add(contruirTarjetaGrid("Color",       coche.getColor()));
 
         // Separador
         JSeparator sep = new JSeparator();
@@ -218,7 +215,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         panelInfo.add(Box.createVerticalStrut(8));
         panelInfo.add(lblError);
 
-        // ── SCROLL + ENSAMBLADO ───────────────────────────────────
+        // ── SCROLL + ENSAMBLADO ───
         JPanel contenido = new JPanel(new BorderLayout());
         contenido.setBackground(BG_DEEP);
         contenido.add(panelImagen, BorderLayout.NORTH);
@@ -236,7 +233,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         setVisible(true);
     }
 
-    // ── Lógica ────────────────────────────────────────────────────
+
 
     private void comprarCoche(Usuario usuario, Coche coche, PantallaPrincipal pantallaPrincipal, JLabel lblError) {
         if (usuario == null) {
@@ -266,9 +263,8 @@ public class VentanaDetalleCocheDisponible extends JFrame {
 
     }
 
-    // ── Helpers UI ────────────────────────────────────────────────
 
-    private JButton buildCloseButton() {
+    private JButton contruirBotonCerrar() {
         JButton btn = new JButton("✕");
         btn.setFont(new Font("SansSerif", Font.PLAIN, 13));
         btn.setForeground(TEXT_HINT);
@@ -287,7 +283,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         return btn;
     }
 
-    private JPanel buildStatCard(String label, String value) {
+    private JPanel contruirTarjetaPrecio(String label, String value) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBackground(BG_SURFACE);
@@ -312,7 +308,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         return card;
     }
 
-    private JPanel buildGridCard(String label, String value) {
+    private JPanel contruirTarjetaGrid(String label, String value) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBackground(BG_CARD);
@@ -335,23 +331,4 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         return card;
     }
 
-    private JButton buildAccentButton(String text) {
-        JButton btn = new JButton(text);
-        btn.setFont(new Font("SansSerif", Font.BOLD, 14));
-        btn.setBackground(ACCENT);
-        btn.setForeground(BG_DEEP);
-        btn.setOpaque(true);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-        btn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.addMouseListener(new MouseAdapter() {
-            @Override public void mouseEntered(MouseEvent e)  { btn.setBackground(new Color(230, 230, 230)); }
-            @Override public void mouseExited(MouseEvent e)   { btn.setBackground(ACCENT); }
-            @Override public void mousePressed(MouseEvent e)  { btn.setBackground(new Color(200, 200, 200)); }
-            @Override public void mouseReleased(MouseEvent e) { btn.setBackground(ACCENT); }
-        });
-        return btn;
-    }
 }

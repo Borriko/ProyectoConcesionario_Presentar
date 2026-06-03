@@ -1,7 +1,6 @@
 import Componentes.ModernButton;
 import Componentes.ModernScrollPane;
 import Modelos.Coche;
-import Modelos.Usuario;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -55,27 +54,23 @@ public class VentanaDetalleCochePropio extends JFrame {
         panelImagen.setPreferredSize(new Dimension(660, 240));
         panelImagen.setOpaque(false);
 
-        // Cargar imagen en hilo aparte
-        new Thread(() -> {
-            if (url_img != null) {
-                ImageIcon icono = new ImageIcon(url_img);
-                Image orig = icono.getImage();
-                int w = orig.getWidth(null), h = orig.getHeight(null);
-                if (w > 0 && h > 0) {
-                    double escala = Math.min(660.0 / w, 240.0 / h);
-                    int wf = (int)(w * escala), hf = (int)(h * escala);
-                    Image scaled = orig.getScaledInstance(wf, hf, Image.SCALE_SMOOTH);
-                    SwingUtilities.invokeLater(() -> {
-                        panelImagen.putClientProperty("imagen",     scaled);
-                        panelImagen.putClientProperty("anchoFinal", wf);
-                        panelImagen.putClientProperty("altoFinal",  hf);
-                        panelImagen.repaint();
-                    });
-                }
+        if (url_img != null) {
+            ImageIcon icono = new ImageIcon(url_img);
+            Image orig = icono.getImage();
+            int w = orig.getWidth(null), h = orig.getHeight(null);
+            if (w > 0 && h > 0) {
+                double escala = Math.min(660.0 / w, 240.0 / h);
+                int wf = (int)(w * escala), hf = (int)(h * escala);
+                Image scaled = orig.getScaledInstance(wf, hf, Image.SCALE_SMOOTH);
+                SwingUtilities.invokeLater(() -> {
+                    panelImagen.putClientProperty("imagen",     scaled);
+                    panelImagen.putClientProperty("anchoFinal", wf);
+                    panelImagen.putClientProperty("altoFinal",  hf);
+                    panelImagen.repaint();
+                });
             }
-        }).start();
+        }
 
-        // Overlay encima de la imagen: REF + botón cerrar
         JPanel overlayImagen = new JPanel(new BorderLayout());
         overlayImagen.setOpaque(false);
         overlayImagen.setBorder(BorderFactory.createEmptyBorder(14, 16, 14, 16));
@@ -90,7 +85,7 @@ public class VentanaDetalleCochePropio extends JFrame {
                 BorderFactory.createEmptyBorder(3, 8, 3, 8)
         ));
 
-        JButton btnClose = buildCloseButton();
+        JButton btnClose = contruirBotonCerrar();
 
         overlayImagen.add(lblRef,   BorderLayout.WEST);
         overlayImagen.add(btnClose, BorderLayout.EAST);
@@ -141,12 +136,12 @@ public class VentanaDetalleCochePropio extends JFrame {
 
 
 
-// Alineación izquierda completa
+        // Alineación izquierda completa
         rowTitulo.add(colTitulo, BorderLayout.WEST);
 
-// =========================================================
-// GRID STATS
-// =========================================================
+        // =========================================================
+        // GRID STATS
+        // =========================================================
 
         JPanel grid = new JPanel(new GridLayout(1, 3, 10, 0));
 
@@ -156,24 +151,24 @@ public class VentanaDetalleCochePropio extends JFrame {
 
         grid.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        grid.add(buildGridCard(
+        grid.add(contruirTarjetaGrid(
                 "Trasmisión",
                 String.valueOf(coche.getTransmision())
         ));
 
-        grid.add(buildGridCard(
+        grid.add(contruirTarjetaGrid(
                 "Potencia ",
                 String.format("%,d cv", coche.getPotencia())
         ));
 
-        grid.add(buildGridCard(
+        grid.add(contruirTarjetaGrid(
                 "Color",
                 coche.getColor()
         ));
 
-// =========================================================
-// SEPARADOR
-// =========================================================
+        // =========================================================
+        // SEPARADOR
+        // =========================================================
 
         JSeparator sep = new JSeparator();
 
@@ -183,9 +178,9 @@ public class VentanaDetalleCochePropio extends JFrame {
 
         sep.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-// =========================================================
-// BOTÓN
-// =========================================================
+        // =========================================================
+        // BOTÓN
+        // =========================================================
 
         JButton btnVender = new ModernButton("Vender coche");
         btnVender.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -200,9 +195,9 @@ public class VentanaDetalleCochePropio extends JFrame {
                 )
         );
 
-// =========================================================
-// ENSAMBLADO
-// =========================================================
+        // =========================================================
+        // ENSAMBLADO
+        // =========================================================
 
         panelInfo.add(rowTitulo);
 
@@ -218,7 +213,7 @@ public class VentanaDetalleCochePropio extends JFrame {
 
         panelInfo.add(btnVender);
 
-        // ── SCROLL + ENSAMBLADO ───────────────────────────────────
+        // ── SCROLL + ENSAMBLADO ──
         JPanel contenido = new JPanel(new BorderLayout());
         contenido.setBackground(BG_DEEP);
         contenido.add(panelImagen, BorderLayout.NORTH);
@@ -236,9 +231,8 @@ public class VentanaDetalleCochePropio extends JFrame {
         setVisible(true);
     }
 
-    // ── Helpers UI ────────────────────────────────────────────────
-
-    private JButton buildCloseButton() {
+    // ── Helpers UI ──
+    private JButton contruirBotonCerrar() {
         JButton btn = new JButton("✕");
         btn.setFont(new Font("SansSerif", Font.PLAIN, 13));
         btn.setForeground(TEXT_HINT);
@@ -257,32 +251,9 @@ public class VentanaDetalleCochePropio extends JFrame {
         return btn;
     }
 
-    private JPanel buildStatCard(String label, String value) {
-        JPanel card = new JPanel();
-        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
-        card.setBackground(BG_SURFACE);
-        card.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(BORDER, 1),
-                BorderFactory.createEmptyBorder(8, 14, 8, 14)
-        ));
 
-        JLabel lbl = new JLabel(label);
-        lbl.setFont(new Font("SansSerif", Font.PLAIN, 11));
-        lbl.setForeground(TEXT_HINT);
-        lbl.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
-        JLabel val = new JLabel(value);
-        val.setFont(new Font("SansSerif", Font.BOLD, 17));
-        val.setForeground(TEXT_PRI);
-        val.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
-        card.add(lbl);
-        card.add(Box.createVerticalStrut(2));
-        card.add(val);
-        return card;
-    }
-
-    private JPanel buildGridCard(String label, String value) {
+    private JPanel contruirTarjetaGrid(String label, String value) {
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBackground(BG_CARD);
@@ -305,23 +276,5 @@ public class VentanaDetalleCochePropio extends JFrame {
         return card;
     }
 
-    private JButton buildAccentButton(String text) {
-        JButton btn = new JButton(text);
-        btn.setFont(new Font("SansSerif", Font.BOLD, 14));
-        btn.setBackground(ACCENT);
-        btn.setForeground(BG_DEEP);
-        btn.setOpaque(true);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-        btn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.addMouseListener(new MouseAdapter() {
-            @Override public void mouseEntered(MouseEvent e)  { btn.setBackground(new Color(230, 230, 230)); }
-            @Override public void mouseExited(MouseEvent e)   { btn.setBackground(ACCENT); }
-            @Override public void mousePressed(MouseEvent e)  { btn.setBackground(new Color(200, 200, 200)); }
-            @Override public void mouseReleased(MouseEvent e) { btn.setBackground(ACCENT); }
-        });
-        return btn;
-    }
+
 }

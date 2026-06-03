@@ -70,41 +70,36 @@ public class TarjetaCoche extends JPanel {
         panelImagen.setPreferredSize(new Dimension(anchoObjetivo, altoObjetivo));
         panelImagen.setOpaque(false);
 
-        // =========================
-        // CARGA IMAGEN EN HILO
-        // =========================
-        new Thread(() -> {
-            String url_imagen = consultas.obtenerURLFotosPorIdCoche(coche.getId());
+        String url_imagen = consultas.obtenerURLFotosPorIdCoche(coche.getId());
 
-            SwingUtilities.invokeLater(() -> tarjeta.putClientProperty("url_imagen", url_imagen));
+        SwingUtilities.invokeLater(() -> tarjeta.putClientProperty("url_imagen", url_imagen));
 
-            if (url_imagen != null) {
-                ImageIcon icono          = new ImageIcon(url_imagen);
-                Image imagenOriginal     = icono.getImage();
+        if (url_imagen != null) {
+            ImageIcon icono          = new ImageIcon(url_imagen);
+            Image imagenOriginal     = icono.getImage();
 
-                int anchoOrig = imagenOriginal.getWidth(null);
-                int altoOrig  = imagenOriginal.getHeight(null);
+            int anchoOrig = imagenOriginal.getWidth(null);
+            int altoOrig  = imagenOriginal.getHeight(null);
 
-                if (anchoOrig > 0 && altoOrig > 0) {
-                    double escala = Math.min(
-                            (double) anchoObjetivo / anchoOrig,
-                            (double) altoObjetivo  / altoOrig
-                    );
+            if (anchoOrig > 0 && altoOrig > 0) {
+                double escala = Math.min(
+                        (double) anchoObjetivo / anchoOrig,
+                        (double) altoObjetivo  / altoOrig
+                );
 
-                    int anchoFinal = (int) (anchoOrig * escala);
-                    int altoFinal  = (int) (altoOrig  * escala);
+                int anchoFinal = (int) (anchoOrig * escala);
+                int altoFinal  = (int) (altoOrig  * escala);
 
-                    Image imagenEscalada = imagenOriginal.getScaledInstance(anchoFinal, altoFinal, Image.SCALE_SMOOTH);
+                Image imagenEscalada = imagenOriginal.getScaledInstance(anchoFinal, altoFinal, Image.SCALE_SMOOTH);
 
-                    SwingUtilities.invokeLater(() -> {
-                        panelImagen.putClientProperty("imagen",      imagenEscalada);
-                        panelImagen.putClientProperty("anchoFinal",  anchoFinal);
-                        panelImagen.putClientProperty("altoFinal",   altoFinal);
-                        panelImagen.repaint();
-                    });
-                }
+                SwingUtilities.invokeLater(() -> {
+                    panelImagen.putClientProperty("imagen",      imagenEscalada);
+                    panelImagen.putClientProperty("anchoFinal",  anchoFinal);
+                    panelImagen.putClientProperty("altoFinal",   altoFinal);
+                    panelImagen.repaint();
+                });
             }
-        }).start();
+        }
 
         // =========================
         // BADGE AÑO
@@ -125,6 +120,7 @@ public class TarjetaCoche extends JPanel {
         // =========================
         // INFO
         // =========================
+
         JPanel panelInfo = new JPanel();
         panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.Y_AXIS));
         panelInfo.setOpaque(false);
