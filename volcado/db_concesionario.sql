@@ -88,7 +88,7 @@ INSERT INTO usuarios (nombre, password, email, url_imagen, dinero) VALUES
                                                                        ('Elena Diaz', '777', 'elena@gmail.com', NULL, 22000.00),
                                                                        ('David Aguilera', '111', 'david@gmail.com', 'img/fotos_de_perfil/David Aguilera Navarro/foto_perfil.jpeg', 129999.00),
                                                                        ('Monyination', '111', 'monyi@gmail.com', 'img/fotos_de_perfil/Monyination/foto_perfil.jpeg', 299999.00),
-                                                                       ('Alicia Profe', '111', 'alicia@gmail.com', NULL, 9999999.00);
+                                                                       ('Alicia Profe', 'thebestprofe', 'alicia@gmail.com', NULL, 9999999.00);
 
 
 INSERT INTO coches
