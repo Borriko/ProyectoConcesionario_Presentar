@@ -167,7 +167,7 @@ public class VentanaDetalleCocheDisponible extends JFrame {
         comboPago.setFont(new Font("SansSerif", Font.PLAIN, 13));
 
         // Etiqueta que muestra el precio según la forma de pago
-        JLabel lblPrecioFinal = new JLabel(String.format("Total: %,.0f €", coche.getPrecio()));
+        JLabel lblPrecioFinal = new JLabel(String.format("Total: %,.02f €", coche.getPrecio()));
         lblPrecioFinal.setFont(new Font("SansSerif", Font.BOLD, 14));
         lblPrecioFinal.setForeground(new Color(52, 199, 89));
         lblPrecioFinal.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -185,9 +185,9 @@ public class VentanaDetalleCocheDisponible extends JFrame {
             double precioFinal     = coche.getPrecio() + cantidadInteres;
 
             if (interes == 0) {
-                lblPrecioFinal.setText(String.format("%,.0f €", coche.getPrecio()));
+                lblPrecioFinal.setText(String.format("%,.02f €", coche.getPrecio()));
             } else {
-                lblPrecioFinal.setText(String.format("%,.0f € + %,.0f € = %,.0f €",
+                lblPrecioFinal.setText(String.format("%,.02f € + %,.02f € = %,.02f €",
                         coche.getPrecio(), cantidadInteres, precioFinal));
             }
         });
