@@ -95,7 +95,7 @@ public class PantallaLogin extends JPanel {
 
         email_escribir.setBackground(new Color(245,245,245));
 
-        email_escribir.setMaximumSize(new Dimension(320, 35));
+        email_escribir.setMaximumSize(new Dimension(320, 30));
 
         email_escribir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -142,7 +142,7 @@ public class PantallaLogin extends JPanel {
 
         contraseña_escribir.setBackground(new Color(245,245,245));
 
-        contraseña_escribir.setMaximumSize(new Dimension(320, 35));
+        contraseña_escribir.setMaximumSize(new Dimension(320, 30));
 
         contraseña_escribir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -172,19 +172,7 @@ public class PantallaLogin extends JPanel {
 
         contenedor_logeo.add(Box.createVerticalStrut(25));
 
-        // ================= HELP =================
 
-        JLabel help = new JLabel("¿Problemas para entrar?");
-
-        help.setFont(new Font("Arial", Font.BOLD, 13));
-
-        help.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        help.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        contenedor_logeo.add(help);
-
-        contenedor_logeo.add(Box.createVerticalStrut(40));
 
         // ================= BOTON LOGIN =================
 
@@ -202,9 +190,9 @@ public class PantallaLogin extends JPanel {
 
         iniciar_sesion_boton.setBorder(BorderFactory.createEmptyBorder(4,4,4,4));
 
-        iniciar_sesion_boton.setMaximumSize(new Dimension(180, 50));
+        iniciar_sesion_boton.setMaximumSize(new Dimension(180, 20));
 
-        iniciar_sesion_boton.setPreferredSize(new Dimension(180, 50));
+        iniciar_sesion_boton.setPreferredSize(new Dimension(180, 40));
 
         iniciar_sesion_boton.setAlignmentX(Component.LEFT_ALIGNMENT);
 

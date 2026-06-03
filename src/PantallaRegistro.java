@@ -91,7 +91,7 @@ public class PantallaRegistro extends JPanel {
 
         nombre_escribir.setBackground(new Color(245, 245, 245));
 
-        nombre_escribir.setMaximumSize(new Dimension(320, 35));
+        nombre_escribir.setMaximumSize(new Dimension(320, 20));
 
         nombre_escribir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -138,7 +138,7 @@ public class PantallaRegistro extends JPanel {
 
         email_escribir.setBackground(new Color(245, 245, 245));
 
-        email_escribir.setMaximumSize(new Dimension(320, 35));
+        email_escribir.setMaximumSize(new Dimension(320, 20));
 
         email_escribir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -185,7 +185,7 @@ public class PantallaRegistro extends JPanel {
 
         contraseña_escribir.setBackground(new Color(245, 245, 245));
 
-        contraseña_escribir.setMaximumSize(new Dimension(320, 35));
+        contraseña_escribir.setMaximumSize(new Dimension(320, 20));
 
         contraseña_escribir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -215,19 +215,7 @@ public class PantallaRegistro extends JPanel {
 
         contenedor_registro.add(Box.createVerticalStrut(25));
 
-        // ================= HELP =================
 
-        JLabel help = new JLabel("Problemas para recuperar la contraseña?");
-
-        help.setFont(new Font("Arial", Font.BOLD, 13));
-
-        help.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        help.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        contenedor_registro.add(help);
-
-        contenedor_registro.add(Box.createVerticalStrut(35));
 
         // ================= BOTON REGISTRO =================
 
@@ -243,9 +231,9 @@ public class PantallaRegistro extends JPanel {
 
         registro_boton.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        registro_boton.setMaximumSize(new Dimension(180, 50));
+        registro_boton.setMaximumSize(new Dimension(180, 40));
 
-        registro_boton.setPreferredSize(new Dimension(180, 50));
+        registro_boton.setPreferredSize(new Dimension(180, 40));
 
         registro_boton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
